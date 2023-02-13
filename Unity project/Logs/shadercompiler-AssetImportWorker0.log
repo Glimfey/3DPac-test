@@ -3,4 +3,9 @@ Cmd: initializeCompiler
 
 Unhandled exception: Protocol error - failed to read magic number (error -2147483644, transferred 0/4)
 
+<<<<<<< HEAD
+=======
+Unhandled exception: Protocol error - failed to read magic number (error -2147483644, transferred 0/4)
+
+>>>>>>> a2064de (Changed Blender files)
 Quitting shader compiler process
