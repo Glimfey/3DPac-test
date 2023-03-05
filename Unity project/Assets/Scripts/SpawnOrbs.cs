@@ -16,12 +16,6 @@ public class SpawnOrbs : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     List<Vector3> OrbPositionAssign()
     {
         List<Vector3> orbPosList = new List<Vector3>();
