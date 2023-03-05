@@ -1,11 +1,25 @@
+using FishNet.Object;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FishNet.Connection;
+using FishNet.Object;
 
-public class Player : MonoBehaviour
+public class Player : NetworkBehaviour
 {
     public GameObject OrbHolding;
-
+    private Camera playerCamera;
+    private float cameraYOffset =  0.4f;
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+        if (base.IsOwner)
+        {
+            playerCamera = Camera.main;
+            playerCamera.transform.position = new Vector3(transform.position.x, transform.position.y + cameraYOffset, transform.position.z);
+            playerCamera.transform.SetParent(transform);
+        }
+    }
     public void Start()
     {
         OrbHolding.SetActive(false);
