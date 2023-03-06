@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FishNet.Connection;
-using FishNet.Object;
+using FishNet.Example.Scened;
 
 public class Player : NetworkBehaviour
 {
@@ -18,6 +18,10 @@ public class Player : NetworkBehaviour
             playerCamera = Camera.main;
             playerCamera.transform.position = new Vector3(transform.position.x, transform.position.y + cameraYOffset, transform.position.z);
             playerCamera.transform.SetParent(transform);
+        }
+        else
+        {
+            gameObject.GetComponent<PlayerController>().enabled = false;
         }
     }
     public void Start()
