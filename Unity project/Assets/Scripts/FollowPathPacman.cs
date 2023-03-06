@@ -18,7 +18,7 @@ public class FollowPathPacman : MonoBehaviour
     {
         if(true)
         {
-            navMeshAgent.SetDestination(target.position);
+            //navMeshAgent.SetDestination(target.position);
         }
         else
         {
