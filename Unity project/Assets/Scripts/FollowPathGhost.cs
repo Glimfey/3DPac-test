@@ -27,10 +27,10 @@ public class FollowPathGhost : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         //float angle = Vector3.Angle(this.transform.position, target.position);
         float distanceTarget = Vector3.Distance(target.transform.position, navMeshAgent.transform.position);
         float distancePacman = Vector3.Distance(pacMan.transform.position, navMeshAgent.transform.position);
-        target.position = target.position;
         //run from pacman
         if(distancePacman < 10)
         {
@@ -46,7 +46,7 @@ public class FollowPathGhost : MonoBehaviour
         //standard wander
         else
         {
-            //Wander();
+            Wander();
             staminaReset++;
         }
         if(staminaReset >= staminaMax)
@@ -57,7 +57,6 @@ public class FollowPathGhost : MonoBehaviour
     }
 
     //wander
-    
     Vector3 wanderTarget = Vector3.zero;
     private void Wander()
     {
@@ -74,11 +73,15 @@ public class FollowPathGhost : MonoBehaviour
         Vector3 targetWorld = this.gameObject.transform.InverseTransformVector(targetPos);
         Seek(targetWorld);
         
+        
     }
     
-    //seek for pursuit
-    private Vector3 Seek(Vector3 targetPosition)
+    //seek for pursuit & wander
+    private void Seek(Vector3 targetPosition)
     {
+        navMeshAgent.SetDestination(targetPosition);
+        //also works but not really
+        /*
         transform.LookAt(targetPosition);
         Vector3 desiredVelocity = (targetPosition - transform.position);
         desiredVelocity = desiredVelocity.normalized * maxVelocity * Time.deltaTime;
@@ -88,10 +91,16 @@ public class FollowPathGhost : MonoBehaviour
         velocity = Vector3.ClampMagnitude(velocity + steering, maxSpeed);
         transform.position += velocity * Time.deltaTime;
         return transform.position;
+        */
+
     }
     //flee for evade
-    private Vector3 Flee(Vector3 targetPosition)
+    private void Flee(Vector3 targetPosition)
     {
+        Vector3 FleeVector = targetPosition - this.transform.position;
+        navMeshAgent.SetDestination(this.transform.position - FleeVector);
+        //also works but not really
+        /*
         Vector3 direction = transform.position - pacMan.transform.position;
         transform.rotation = Quaternion.LookRotation(direction);
         Vector3 desiredVelocity = (transform.position - targetPosition);
@@ -100,7 +109,7 @@ public class FollowPathGhost : MonoBehaviour
         Vector3 steering = desiredVelocity - velocity;
         velocity = Vector3.ClampMagnitude(velocity + steering, maxSpeed);
         transform.position += velocity * Time.deltaTime;
-        return transform.position;
+        */
     }
 
     //pursuit player
