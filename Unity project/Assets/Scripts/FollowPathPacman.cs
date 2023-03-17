@@ -45,14 +45,14 @@ public class FollowPathPacman : MonoBehaviour
         findPosition.Add(new Vector3(-13, 1, -35));
         findListPosition = true;
         currentFindList = 0;
-        arrivalPoint = new Vector3(4,1,26);
+        arrivalPoint = new Vector3(4, 1, 26);
     }
 
-    private IEnumerator FOVRoutine ()
+    private IEnumerator FOVRoutine()
     {
         float delay = 0.2f;
         WaitForSeconds wait = new WaitForSeconds(delay);
-        while(true)
+        while (true)
         {
             yield return wait;
             FieldOfViewCheck();
@@ -61,7 +61,7 @@ public class FollowPathPacman : MonoBehaviour
 
     private void FieldOfViewCheck()
     {
-        for(int i=0;i<2;i++)
+        for (int i = 0; i < 2; i++)
         {
             Collider[] rangeChecks = Physics.OverlapSphere(transform.position, viewRadius, playersMask);
 
@@ -93,12 +93,12 @@ public class FollowPathPacman : MonoBehaviour
                 canSeePlayer = false;
             }
         }
-            
+
     }
 
     // Update is called once per frame
     void Update()
-    {   
+    {
         if (canSeePlayer)
         {
             Pursuit(target.position);
@@ -107,12 +107,12 @@ public class FollowPathPacman : MonoBehaviour
         {
             float distancePoint = Vector3.Distance(findPosition[currentFindList], transform.position);
             Seek(findPosition[currentFindList]);
-            if (distancePoint <=2)
+            if (distancePoint <= 2)
             {
                 if (findListPosition)
                 {
                     currentFindList++;
-                    if (currentFindList == findPosition.Count-1)
+                    if (currentFindList == findPosition.Count - 1)
                     {
                         findListPosition = false;
                     }
@@ -127,7 +127,7 @@ public class FollowPathPacman : MonoBehaviour
                 }
             }
         }
-        
+
     }
 
     private void Seek(Vector3 targetPosition)

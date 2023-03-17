@@ -25,12 +25,12 @@ public class FollowPathGhost : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
         //float angle = Vector3.Angle(this.transform.position, target.position);
         float distanceTarget = Vector3.Distance(target.transform.position, navMeshAgent.transform.position);
         float distancePacman = Vector3.Distance(pacMan.transform.position, navMeshAgent.transform.position);
         //run from pacman      
-        if(distancePacman < distanceOthers)
+        if (distancePacman < distanceOthers)
         {
             Evade(pacMan.position);
         }
@@ -53,7 +53,7 @@ public class FollowPathGhost : MonoBehaviour
             stamina = 0;
         }
     }
-    
+
     //seek for pursuit & wander
     private void Seek(Vector3 targetPosition)
     {

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public GameObject player;
     private CharacterController controller;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
@@ -11,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private float sprintSpeed = 12.0f;
     private float jumpHeight = 1.0f;
     private float gravityValue = Physics.gravity.y;
+    private bool isCrouching = false;
 
     private void Start()
     {
@@ -46,5 +48,24 @@ public class PlayerMovement : MonoBehaviour
 
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
+
+        if (Input.GetButtonDown("Crouch") && isCrouching == false)
+        {
+            Vector3 vector = new Vector3(1, 0.5f, 1);
+            player.transform.localScale = vector;
+            isCrouching = true;
+            StartCoroutine((string)CrouchTime());
+            
+        }
+        IEnumerable CrouchTime()
+        {
+            yield return new WaitForSeconds(5);
+        }
+        if (Input.GetButtonDown("Crouch") && isCrouching == true)
+        {
+            Vector3 vector = new Vector3(1, 1, 1);
+            player.transform.localScale = vector;
+            isCrouching = false;
+        }
     }
 }
